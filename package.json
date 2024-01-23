@@ -4,5 +4,6 @@
   },
   "devDependencies": {
     "@flydotio/node-demo": "^0.2.1"
-  }
+  },
+  "type": "module"
 }

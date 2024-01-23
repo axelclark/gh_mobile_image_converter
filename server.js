@@ -1,6 +1,6 @@
-const fs = require('node:fs')
-const http = require('node:http')
-const url = require('node:url')
+import fs from 'node:fs'
+import http from 'node:http'
+import url from 'node:url'
 
 // set up web server
 const server = http.createServer(listener)
