@@ -1,7 +1,7 @@
 module.exports = {
-  content: ['./views/**/*.tmpl'],
+  content: ["./views/**/*.tmpl.html"],
   theme: {
-    extend: {}
+    extend: {},
   },
-  plugins: []
-}
+  plugins: [require("@tailwindcss/forms")],
+};
