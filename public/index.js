@@ -9,10 +9,8 @@ function processLines(input) {
   const lines = input.split("\n").filter((line) => line !== "");
 
   const updatedLines = lines.map((line) => {
-    console.log(line);
     if (line.startsWith("![")) {
-      const [_, remaining] = line.replace("![", "");
-      console.log(remaining);
+      const remaining = line.replace("![", "");
       const [alt_text, src] = remaining.split("](");
       const [url, _rest] = src.split(")");
       return `<img src="${url}" alt="${alt_text}" width="300"><br/>`;
@@ -23,8 +21,6 @@ function processLines(input) {
 }
 
 function updateValue(e) {
-  console.log(e.target.value);
-
   const updatedLines = processLines(e.target.value);
 
   updatedLines.forEach((line) => {
