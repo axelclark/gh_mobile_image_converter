@@ -1,10 +1,3 @@
-console.log("Hello, world!");
-
-const textarea = document.querySelector("textarea");
-const results = document.getElementById("results");
-
-textarea.addEventListener("change", updateValue);
-
 function processLines(input) {
   const lines = input.split("\n").filter((line) => line !== "");
 
@@ -20,12 +13,44 @@ function processLines(input) {
   return updatedLines;
 }
 
-function updateValue(e) {
-  const updatedLines = processLines(e.target.value);
+function updateOutput() {
+  const updatedLines = processLines(textarea.value);
 
-  updatedLines.forEach((line) => {
+  const newParagraphs = updatedLines.map((line) => {
     const p = document.createElement("p");
     p.textContent = line;
-    results.appendChild(p);
+    return p;
   });
+
+  results.replaceChildren(...newParagraphs);
 }
+
+function handleSubmit(event) {
+  updateOutput();
+  event.preventDefault();
+}
+
+const textarea = document.querySelector("textarea");
+const results = document.getElementById("results");
+
+textarea.addEventListener("change", updateOutput);
+
+const form = document.getElementById("form");
+
+form.addEventListener("submit", handleSubmit);
+
+const copyButton = document.getElementById("copy");
+
+copyButton.addEventListener("click", (_event) => {
+  if ("clipboard" in navigator) {
+    console.log(results.textContent);
+    let trimmedText = results.textContent
+      .split("\n")
+      .map((line) => line.trim())
+      .join("\n");
+
+    navigator.clipboard.writeText(trimmedText);
+  } else {
+    alert("Sorry, your browser does not support clipboard copy.");
+  }
+});
