@@ -6,7 +6,7 @@ function processLines(input) {
       const remaining = line.replace("![", "");
       const [alt_text, src] = remaining.split("](");
       const [url, _rest] = src.split(")");
-      return `<img src="${url}" alt="${alt_text}" width="300"><br/>`;
+      return `<img src="${url}" alt="${alt_text}" width="300"><br/>\n`;
     } else return line;
   });
 
@@ -41,15 +41,25 @@ form.addEventListener("submit", handleSubmit);
 
 const copyButton = document.getElementById("copy");
 
-copyButton.addEventListener("click", (_event) => {
+function toggleState(el) {
+  el.querySelector(".before-copied").classList.toggle("hidden");
+  el.querySelector(".after-copied").classList.toggle("hidden");
+}
+
+copyButton.addEventListener("click", (event) => {
+  const el = event.currentTarget;
+
   if ("clipboard" in navigator) {
-    console.log(results.textContent);
-    let trimmedText = results.textContent
+    const trimmedText = results.textContent
       .split("\n")
       .map((line) => line.trim())
       .join("\n");
 
     navigator.clipboard.writeText(trimmedText);
+    toggleState(el);
+    setTimeout(() => {
+      toggleState(el);
+    }, 3000);
   } else {
     alert("Sorry, your browser does not support clipboard copy.");
   }
