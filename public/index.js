@@ -64,3 +64,10 @@ copyButton.addEventListener("click", (event) => {
     alert("Sorry, your browser does not support clipboard copy.");
   }
 });
+
+const resetButton = document.getElementById("reset");
+
+resetButton.addEventListener("click", (_event) => {
+  textarea.value = "";
+  results.replaceChildren();
+});

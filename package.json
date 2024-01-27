@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "build": "tailwindcss -i src/input.css -o public/index.css"
   },
   "devDependencies": {
